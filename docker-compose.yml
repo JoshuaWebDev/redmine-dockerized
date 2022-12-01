@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  redmine:
+    build: .
+    container_name: redmine
+    restart: always
+    ports:
+      - 8080:3000
+    environment:
+      REDMINE_DB_MYSQL: db
+      REDMINE_DB_PASSWORD: ${DB_PASSWORD}
+      REDMINE_SECRET_KEY_BASE: ${DB_PASSWORD}
+
+  db:
+    image: mysql:5.7
+    container_name: redmine-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    volumes:
+      - ./docker/db:/docker-entrypoint-initdb.d

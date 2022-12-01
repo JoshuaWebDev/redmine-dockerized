@@ -1,0 +1,1 @@
+CREATE TABLE IF EXISTS `redmine`;
